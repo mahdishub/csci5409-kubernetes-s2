@@ -50,7 +50,7 @@ public class MainController {
                 final var entries = lines[i].split(",");
 
                 if (Objects.equals(entries[0], input.getProduct())) {
-                    final var amountValue = Integer.parseInt(entries[1]);
+                    final var amountValue = Integer.parseInt(entries[1].trim());
                     sum += amountValue;
                 }
             }
@@ -76,8 +76,8 @@ public class MainController {
             final var headers = lines[0].split(",");
 
             if (headers.length != 2
-                    || !Objects.equals(headers[0], "product")
-                    || !Objects.equals(headers[1], "amount")) {
+                    || !Objects.equals(headers[0].trim(), "product")
+                    || !Objects.equals(headers[1].trim(), "amount")) {
 
                 throw new IOException();
             }
@@ -89,7 +89,7 @@ public class MainController {
                 }
 
                 try {
-                    Integer.parseInt(entries[1]);
+                    Integer.parseInt(entries[1].trim());
                 } catch (NumberFormatException e) {
                     throw new IOException();
                 }
