@@ -31,6 +31,7 @@ public class MainController {
 
     @PostMapping("/processFile")
     private ResponseEntity<Output> processFile(@RequestBody Input input) {
+        log.info("In process file api");
         validateCSVFormat(input.getFile());
 
         return ResponseEntity.ok(
