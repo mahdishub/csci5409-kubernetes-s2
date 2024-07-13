@@ -16,7 +16,7 @@ steps:
       - '-c'
       - |
         echo "IMAGE TAG IS" $COMMIT_SHA
-        sed -i "s/IMAGE_TAG/$COMMIT_SHA/g" k8s/service1-deployment.yaml
+        sed -i "s/IMAGE_TAG/$COMMIT_SHA/g" k8s/service2-deployment.yaml
 
   - name: 'gcr.io/cloud-builders/kubectl'
     args: [ 'apply', '-f', './k8s' ]
