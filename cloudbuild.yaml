@@ -6,10 +6,23 @@ steps:
            'JAR_NAME=service2-0.0.1-SNAPSHOT.jar',
            '.']
 
-  # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',
            'us-central1-docker.pkg.dev/${PROJECT_ID}/csci5409/service2']
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo "IMAGE TAG IS" $COMMIT_SHA
+        sed -i "s/IMAGE_TAG/$COMMIT_SHA/g" k8s/service1-deployment.yaml
+
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: [ 'apply', '-f', './k8s' ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=csci5409-cluster'
 
 options:
   logging: CLOUD_LOGGING_ONLY
