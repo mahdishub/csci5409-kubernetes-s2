@@ -28,4 +28,4 @@ spec:
       volumes:
         - name: file-storage
           persistentVolumeClaim:
-            claimName: service2-pvc
+            claimName: service1-pvc
