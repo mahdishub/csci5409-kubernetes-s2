@@ -1,14 +1,14 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t',
-           'us-central1-docker.pkg.dev/${PROJECT_ID}/csci5409/service2',
+           'us-central1-docker.pkg.dev/${PROJECT_ID}/csci5409/service2:$COMMIT_SHA',
            '--build-arg',
            'JAR_NAME=service2-0.0.1-SNAPSHOT.jar',
            '.']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',
-           'us-central1-docker.pkg.dev/${PROJECT_ID}/csci5409/service2']
+           'us-central1-docker.pkg.dev/${PROJECT_ID}/csci5409/service2:$COMMIT_SHA']
 
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
